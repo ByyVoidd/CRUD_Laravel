@@ -13,6 +13,20 @@ return new class extends Migration
     {
         Schema::create('riwayat_servis', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignIdd('perangkat_id')
+                  ->constrained('perangkats')
+                  ->cascadeOnDelete();
+
+            $table->text('keluhan');
+            $table->decimal('biaya', 12, 2)->default(0);
+            $table->enum('status', [
+                'menunggu',
+                'diproses',
+                'selesai',
+                'diambil',
+            ])->default('menunggu');
+
             $table->timestamps();
         });
     }
